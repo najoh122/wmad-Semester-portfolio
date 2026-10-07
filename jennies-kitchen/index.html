@@ -111,12 +111,14 @@ footer{background:#0a0a0a;color:#aaa;text-align:center;padding:30px;font-size:14
 <script>
 function placeOrder(){
  let name=document.getElementById('name').value;
+ let phone=document.getElementById('phone').value;
  let order=document.getElementById('order').value;
  if(name==''||order==''){ document.getElementById('msg').innerText='Please fill in your name and order!'; return; }
- document.getElementById('msg').innerText='Thanks '+name+'! Your order "'+order+'" received. We will call you soon!';
- // For GitHub contribution - counts as JS functionality
+ let text="NEW ORDER - JENNIE'S KITCHEN%0AName: "+name+"%0APhone: "+phone+"%0AOrder: "+order+"%0AAddress: Mukono";
+ window.open("https://wa.me/256776326495?text="+text, "_blank");
+ document.getElementById('msg').innerText='Thanks '+name+'! Order sent to WhatsApp 0776316495. We will call you soon!';
  console.log('Order placed by '+name);
-}
+
 </script>
 
 </body>
