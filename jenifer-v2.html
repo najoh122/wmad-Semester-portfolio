@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JENIFER. Supermarket & Restaurant</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui;background:#FFFEFB;color:#111}
+.hero{padding:50px 20px;text-align:center;background:#fff7ed}
+.owner{width:190px;height:190px;margin:0 auto 15px;border-radius:50%;padding:5px;background:linear-gradient(135deg,#d4af37,#f59e0b)}
+.owner img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #fff}
+h1{font-size:50px}.gold{color:#d97706}
+.bar{position:sticky;top:0;background:#fff;padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #eee}
+.btn{padding:10px 16px;border-radius:12px;border:0;font-weight:800;cursor:pointer}
+.btn-gold{background:#111;color:#fbbf24}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:16px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+.card img{width:100%;height:150px;object-fit:cover}
+.card-body{padding:12px}
+.feed{max-width:700px;margin:0 auto;padding:16px}
+.admin{display:none;background:#fffbeb;border:2px dashed #fbbf24;border-radius:16px;padding:14px;margin:14px 0}
+.admin.show{display:block}
+input,textarea,select{width:100%;padding:10px;border-radius:10px;border:1px solid #e5e7eb;margin:6px 0}
+.post{background:#fff;border-radius:16px;padding:14px;margin-bottom:14px;border:1px solid #f3f4f6}
+</style>
+</head>
+<body>
+<div class="bar"><b>JENIFER. — wmad-Semester-portfolio</b><div><button class="btn" onclick="login()">🔐 ADMIN 12345</button> <button class="btn btn-gold" onclick="openCart()">🛒 <span id="cartCount">0</span></button></div></div>
+
+<div class="hero">
+<div class="owner"><img src="jenifer_owner_ai.jpg" alt="Jenifer Owner Same Place"></div>
+<div style="background:#111;color:#fbbf24;display:inline-block;padding:6px 14px;border-radius:20px;font-size:11px">FOUNDER & OWNER — SAME PLACE</div>
+<h1>JENIFER<span class="gold">.</span></h1>
+<p>Big, Beautiful Supermarket & Restaurant  Kampala & Yambio</p>
+<p style="font-size:12px;color:#6b7280;margin-top:8px">Admin Password: 12345.Post in same place</p>
+</div>
+
+<div class="feed">
+<h3>📸 Media Post In Same Place (Admin Only)</h3>
+<div id="adminPanel" class="admin">
+<input type="file" id="postImage" accept="image/*">
+<input id="postTitle" placeholder="Title e.g. Fresh Mangoes">
+<textarea id="postCaption" placeholder="Caption"></textarea>
+<input id="postPrice" type="number" placeholder="Price UGX">
+<label><input type="checkbox" id="addToShop" style="width:auto"> Add to Shop</label>
+<select id="postCategory"><option>supermarket</option><option>restaurant</option><option>offer</option></select>
+<button class="btn btn-gold" style="width:100%;margin-top:10px" onclick="publishPost()">PUBLISH IN SAME PLACE</button>
+</div>
+<div id="mediaFeed"></div>
+</div>
+
+<div class="grid" id="shopGrid"></div>
+
+<script>
+let ADMIN='12345',isAdmin=localStorage.getItem('jenifer_admin')==='1',cart=JSON.parse(localStorage.getItem('jenifer_cart')||'[]'),posts=JSON.parse(localStorage.getItem('jenifer_posts')||'[]'),shop=[{name:'Mangoes 1kg',price:5000,img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400',cat:'supermarket'},{name:'Nzeme Mbiro',price:15000,img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',cat:'restaurant'},{name:'Kpembe + Posho',price:12000,img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400',cat:'restaurant'}];
+function login(){let p=prompt('Password 12345:');if(p===ADMIN){isAdmin=true;localStorage.setItem('jenifer_admin','1');document.getElementById('adminPanel').classList.add('show');alert('ADMIN OK');}else alert('Wrong');}
+function publishPost(){if(!isAdmin)return alert('Login 12345');let t=document.getElementById('postTitle').value,c=document.getElementById('postCaption').value,pr=document.getElementById('postPrice').value,a=document.getElementById('addToShop').checked,cat=document.getElementById('postCategory').value,f=document.getElementById('postImage').files[0];if(!t)return alert('Title');let img='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400';if(f)img=URL.createObjectURL(f);posts.unshift({title:t,caption:c,price:pr,img:img,cat:cat,date:new Date().toLocaleString()});localStorage.setItem('jenifer_posts',JSON.stringify(posts));if(a&&pr)shop.unshift({name:t,price:parseInt(pr),img:img,cat:cat});render();alert('Published in same place!');}
+function render(){document.getElementById('mediaFeed').innerHTML=posts.map(p=>`<div class=post><img src='${p.img}' style='width:100%;height:200px;object-fit:cover;border-radius:12px'><h4>${p.title}</h4><p>${p.caption||''}</p><b style='color:#d97706'>${p.price?p.price+' UGX':''}</b><br><small>${p.date}</small></div>`).join('')||'<p style="text-align:center;color:#9ca3af;padding:20px">No posts yet — Login 12345</p>';document.getElementById('shopGrid').innerHTML=shop.map((it,i)=>`<div class=card><img src='${it.img}'><div class=card-body><h4>${it.name}</h4><b style='color:#d97706'>${it.price} UGX</b><button class='btn btn-gold' style='width:100%;margin-top:8px' onclick='cart.push(shop[${i}]);localStorage.setItem("jenifer_cart",JSON.stringify(cart));document.getElementById("cartCount").innerText=cart.length'>ADD</button></div></div>`).join('');document.getElementById('cartCount').innerText=cart.length;if(isAdmin)document.getElementById('adminPanel').classList.add('show');}
+function openCart(){if(!cart.length)return alert('Empty');let total=cart.reduce((a,b)=>a+b.price,0);let msg='Hello JENIFER Order:%0A'+cart.map(c=>'- '+c.name+' '+c.price).join('%0A')+'%0ATotal '+total;window.open('https://wa.me/256700000000?text='+msg);}
+render();
+</script>
+</body>
+</html>
