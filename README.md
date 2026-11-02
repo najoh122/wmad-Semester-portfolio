@@ -1,42 +1,36 @@
+
 WMAD Semester Portfolio
+
+Welcome to my Web Development and Application (WMAD) semester portfolio.
 
 Live Website
 
-https://najoh122.github.io/wmad-Semester-portfolio/
+"View my portfolio" (https://najoh122.github.io/wmad-Semester-portfolio/)
 
 GitHub Repository
 
-https://github.com/najoh122/wmad-Semester-portfolio
+"View the source code" (https://github.com/najoh122/wmad-Semester-portfolio)
 
-Responsive Interface
+About the Project
 
-This website was developed as part of the WMAD semester coursework. CSS was added to improve the appearance, usability, and responsiveness of the website on different screen sizes.
+This portfolio was developed as part of my semester coursework to demonstrate my understanding of web development fundamentals and practical application development.
 
-Responsive Changes
+Features
 
-- Used an external CSS stylesheet to control the appearance of the website.
-- Used Flexbox and Grid where appropriate for the page layout.
-- Added responsive styling for different screen sizes.
-- Improved typography, spacing, and overall readability.
-- Made the page content and images responsive to help prevent overflow.
-- Added accessibility features to improve usability.
-
-Testing
-
-The website was tested on both a small mobile screen and a normal desktop screen. The navigation, text, images, forms, and page layout were checked to make sure the website remained usable at different screen sizes.
-
-Fix Made
-
-During testing, the responsive layout was checked and the CSS was adjusted to improve the appearance and usability of the website on smaller screens.
+- Responsive design for different screen sizes
+- Clean and user-friendly interface
+- Structured page layout using HTML
+- CSS styling with Flexbox and Grid
+- Improved typography, spacing, and readability
 
 Technologies Used
 
-- HTML5
-- CSS3
-- Git
-- GitHub
-- GitHub Pages
+- HTML
+- CSS
+- Git and GitHub
 
-Author
+Learning Outcomes
 
-Takua Jenifer David Timon
+Through this project, I gained practical experience in building and styling websites, organizing project files, using version control, and improving website responsiveness.
+
+This portfolio represents my continued growth as a web developer.
