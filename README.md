@@ -1,4 +1,4 @@
-My name is  Jenifer David
+
 WMAD Semester Portfolio
 
 Welcome to my Web Development and Application (WMAD) semester portfolio.
